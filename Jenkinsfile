@@ -28,7 +28,7 @@ post{
       always{
             sh 'docker rm -f mypycont'
             sh 'docker run --name mypycont -d -p 3000:5000 my-flask'
-            mail to: "vennilavan98@gmail.com",
+            mail to: "jvarman1605@gmail.com",
             subject: "Notification mail from jenkins",
             body: "CiCd pipeline"
         }
