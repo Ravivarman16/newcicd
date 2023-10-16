@@ -15,10 +15,11 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDS}", passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-          sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io"
-          sh 'docker push $DOCKER_BFLASK_IMAGE'
-        }
+                withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerPassword')]) {
+                    sh "docker login -u ravivarman46 -p ${dockerPassword}"
+                }
+                sh 'docker push ravivarman46/my-flask'
+            }
       }
     }
     
