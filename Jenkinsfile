@@ -13,11 +13,12 @@ pipeline {
         sh 'docker run my-flask python -m pytest app/tests/'
       }
     }
-    stage('Deploy') {
-            stage('Login into DockerHub') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                    sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io"
+    
+    stage('Login into DockerHub') {
+        steps {
+            withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin docker.io"
+                sh ' docker push $DOCKER_BFLASK_IMAGE'
                 }
             }
         }
