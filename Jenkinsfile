@@ -28,7 +28,7 @@ pipeline {
     always{
         sh 'docker rm -f mypycont'
         sh 'docker run --name mypycont -d -p 3000:5000 my-flask'
-        emailext to: "jravi1605@gmail.com",
+        emailext to: "jvarman1605@gmail.com",
         subject: "Notification mail from jenkins",
         body: "CiCd pipeline"
         }
